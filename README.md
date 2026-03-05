@@ -32,10 +32,7 @@ Run:
 
 python generate.py
 
-This script will:
-
--   generate **10 GB** of table data in .npy format
--   store the dataset in the directory `stress_test_data/`
+This script will: generate **10 GB** of table data in .npy format and store the dataset in the directory `stress_test_data/`
 
 A fixed random seed is used so that the dataset is identical across
 runs.
@@ -63,7 +60,7 @@ The following measures were taken to ensure reproducible results:
 -   Fixed random seeds were used for Python, NumPy, and PyTorch.
 -   The order of worker configurations is randomized to reduce
     filesystem cache bias.
--   Each configuration is executed multiple times and results are
+-   Each configuration is executed multiple times and the results are
     averaged.
 
 These steps reduce measurement noise and allow results to be reproduced
@@ -71,25 +68,22 @@ on a clean system with a high precision.
 
 # GitHub repository structure
 
-`
-├── generate.py 
-├── benchmark.py 
-├── process_data.py
-├── requirements.txt 
+```
+├── generate.py # -- create the synthetic dataset
+├── benchmark.py # run the DataLoader benchmark
+├── process_data.py # a torch.utils.data.Dataset implementation
+├── requirements.txt # Python dependencies
+├── report.pdf # final report
 └── README.md
-`
--   `generate_dataset.py` -- creates the synthetic dataset
--   `benchmark.py` -- runs the DataLoader benchmark
--   `process_data.py` -- a torch.utils.data.Dataset implementation
--   `requirements.txt` -- Python dependencies
--   `darshan_reports` -- contain the Darshan reports that we later analyze
--   `report.pdf`      -- final report
+```
 ------------------------------------------------------------------------
 
 # Benchmark performance Notes
 
-Performance results depend entirely on CPU model, disk type (HDD/SSD) and amount of system resources available.
+Performance results depend strongly on CPU model, disk type (HDD/SSD), OS, filesystem and amount of system resources available.
 The benchmark was run on the machine with
 * CPU: Intel Core i7 14650HX
-* 
-The benchmark is thus designed to evaluate **relative scaling behavior**.
+* Disk: PCIe SDD
+* RAM: 16 GB (~12 GB available during the benchmark execution)
+* OS: Linux
+Because of this dependency, we should interpret the benchmark results in terms of  **relative scaling behavior**, while varying worker configurations.
