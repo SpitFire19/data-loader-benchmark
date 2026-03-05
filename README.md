@@ -69,7 +69,7 @@ on a clean system with a high precision.
 # GitHub repository structure
 
 ```
-├── generate.py # -- create the synthetic dataset
+├── generate.py # create a synthetic dataset
 ├── benchmark.py # run the DataLoader benchmark
 ├── process_data.py # a torch.utils.data.Dataset implementation
 ├── requirements.txt # Python dependencies
