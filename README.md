@@ -86,4 +86,5 @@ The benchmark was run on the machine with
 * Disk: PCIe SDD
 * RAM: 16 GB (~12 GB available during the benchmark execution)
 * OS: Linux
+
 Because of this dependency, we should interpret the benchmark results in terms of  **relative scaling behavior**, while varying worker configurations.
